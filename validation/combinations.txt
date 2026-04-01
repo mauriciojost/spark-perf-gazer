@@ -1,0 +1,6 @@
+# spark_version  scala_version  jdk_version
+3.5.2            2.12           17
+3.5.2            2.12           8
+3.5.2            2.12           11
+3.4.1            2.12           8
+3.4.1            2.12           11
