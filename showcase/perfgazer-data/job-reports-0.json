@@ -1,0 +1,6 @@
+{"jobId":0,"groupId":"","jobName":"Job 1: Light filter on small dataset","jobStartTime":1744444800000,"jobEndTime":1744444802500,"sqlId":"0","stages":[0]}
+{"jobId":1,"groupId":"","jobName":"Job 1: Light filter on small dataset","jobStartTime":1744444802600,"jobEndTime":1744444803100,"sqlId":"0","stages":[1]}
+{"jobId":2,"groupId":"","jobName":"Job 2: Aggregation with shuffle on medium dataset","jobStartTime":1744444804000,"jobEndTime":1744444812000,"sqlId":"1","stages":[2,3]}
+{"jobId":3,"groupId":"","jobName":"Job 2: Aggregation with shuffle on medium dataset","jobStartTime":1744444812100,"jobEndTime":1744444813500,"sqlId":"1","stages":[4]}
+{"jobId":4,"groupId":"","jobName":"Job 3: Heavy self-join on large dataset","jobStartTime":1744444814000,"jobEndTime":1744444856000,"sqlId":"2","stages":[5,6,7]}
+{"jobId":5,"groupId":"","jobName":"Job 3: Heavy self-join on large dataset","jobStartTime":1744444856100,"jobEndTime":1744444857500,"sqlId":"2","stages":[8]}

@@ -1,0 +1,1 @@
+# PerfGazer Analyzer MCP Server
