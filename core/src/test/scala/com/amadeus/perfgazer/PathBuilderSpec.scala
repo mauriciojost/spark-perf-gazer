@@ -82,5 +82,21 @@ class PathBuilderSpec extends SimpleSpec with GivenWhenThen {
     it("should return the input unchanged when no separators are present") {
       "noseparator".normalizePath shouldBe "noseparator"
     }
+
+    it("should resolve to the same value when called multiple times (JVM-stable time and UUID)") {
+      withSpark(appName = this.getClass.getName) { spark =>
+        val conf = spark.sparkContext.getConf
+        val template = "/tmp/perfgazer".withDate.withTime.withRunId
+
+        val first = template.resolveProperties(conf)
+        Thread.sleep(2000)
+        val second = template.resolveProperties(conf)
+
+        first shouldBe second
+        first should include("runId=")
+        first should include("date=")
+        first should include("time=")
+      }
+    }
   }
 }
