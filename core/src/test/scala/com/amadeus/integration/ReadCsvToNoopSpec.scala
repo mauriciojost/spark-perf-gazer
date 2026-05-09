@@ -77,6 +77,21 @@ class ReadCsvToNoopSpec extends SimpleSpec with GivenWhenThen {
           csvNodes.size should be(1)
           csvNodes.head.metrics.keys should contain("number of files read")
 
+          And("SQL node metrics should only contain registered metrics (no nulls or sentinel values)")
+          nodes.foreach { node =>
+            node.metrics.keys.foreach { metricName =>
+              metricName should not be empty
+            }
+            node.metrics.values.foreach { metricValue =>
+              metricValue should not be "-1"
+            }
+          }
+
+          And("SQL node names should include plan node IDs")
+          nodes.foreach { node =>
+            node.nodeName should include regex "\\(\\d+\\)"
+          }
+
           And("it should build SQL reports with details")
           val sqlDetails = sqlReport.details
           sqlDetails should include regex "== Parsed Logical Plan =="
@@ -100,6 +115,11 @@ class ReadCsvToNoopSpec extends SimpleSpec with GivenWhenThen {
           stageReport.readBytes should be > 30L * 1024 * 1024
           stageReport.writeBytes should be(0) // noop
           stageReport.execCpuNs should be > 0L
+
+          And("stage reports should include accumulator IDs")
+          stageReports.foreach { stage =>
+            stage.accumulatorIds should not be null
+          }
 
           And("it should not generate any report if all is disabled")
           emptySinks.reports.size should be(0)
